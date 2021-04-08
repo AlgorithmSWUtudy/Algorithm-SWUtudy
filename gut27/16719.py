@@ -7,23 +7,23 @@ for i in range(len(n)):
   text.append((ord(n[i]),i))
 result = []
 
-text_fist = sorted(text, key=lambda x:x[0])[0]
-result.append((chr(text_fist[0]),text_fist[1]))
-print(chr(text_fist[0]))
-queue.append(text[text_fist[1]+1:])
-queue.append(text[:text_fist[1]])
-
-while queue:
+def find_text(temp):
   result_text = []
-  temp = queue.popleft()
   text_fist = sorted(temp, key=lambda x:x[0])[0]
-  result.append((chr(text_fist[0]),text_fist[1]))
+  result.append(text_fist)
   result.sort(key=lambda x:x[1])
   for i in result:
-    result_text.append(i[0])
+    result_text.append(chr(i[0]))
   print("".join(result_text))
   index = temp.index((text_fist[0],text_fist[1]))
   if len(temp[index+1:]) != 0:
-    queue.append(temp[index+1:])
+    find_text(temp[index+1:])
   if len(temp[:index]) != 0:
-    queue.append(temp[:index])
+    find_text(temp[:index])
+  
+
+text_fist = sorted(text, key=lambda x:x[0])[0]
+result.append(text_fist)
+print(chr(text_fist[0]))
+find_text(text[text_fist[1]+1:])
+find_text(text[:text_fist[1]])
