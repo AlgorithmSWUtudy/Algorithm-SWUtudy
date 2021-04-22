@@ -4,10 +4,10 @@
 
 using namespace std;
 
-void DFS(int x);
+void DFS(int x, int y);
 
 vector <vector <int> > arr;
-int n, r, cnt = 0, maxValue = 0;
+int n, r, maxValue = 0;
 int main() {
 	
 	cin >> n;
@@ -19,26 +19,17 @@ int main() {
 		cin >> arr[0][i] >> arr[1][i];
 	}
 	
-	DFS(0);
+	DFS(0, 0);
 	cout << maxValue;
 	return 0;
 }
 
-void DFS(int x){
+void DFS(int x, int y){
 	if(x == n){
-		cnt += arr[1][x];
-		maxValue = max(cnt, maxValue);
-		cnt -= arr[1][x];
-		return ;
+		maxValue = max(y, maxValue);
 	}
-	for(int i = x ; i < n; i++){
-		if(i + arr[0][i] <= n){
-			cnt += arr[1][i];
-		 	DFS(i + arr[0][i]);
-			cnt -= arr[1][i];
-		}
-		else{
-			maxValue = max(cnt, maxValue);
-		}
+	else{
+		if(x + arr[0][x] <= n) DFS(x + arr[0][x], y + arr[1][x]);
+		DFS(x + 1, y);
 	}
 }
