@@ -16,6 +16,15 @@ set <int> var;
 int ch[7];
 vector <int> tmp;
 
+struct Position{
+    int x, y, z;
+    Position(int x, int y, int z){
+        this->x = x;
+        this->y = y;
+        this->z = z;
+    }
+};
+
 void dfs(){
     if(tmp.size() == var.size()){
         order.push_back(tmp);
@@ -34,31 +43,43 @@ void dfs(){
 
 int solution(vector<vector<int>> board, int r, int c) {
     int answer = 2147000000;
-    vector<vector<pair <int, int>>> memo(7);
-    queue <pair <int, int>> q;
+    queue <Position> q;
     
-    for(int i = 0; i < 4; i++){
-        for(int j = 0; j < 4; j++){
-            if(board[i][j] != 0){
-                var.insert(board[i][j]);
-                memo[i].push_back(make_pair(i,j));
-            }
-        }
-    }
     dfs();
-    q.push(make_pair(r,c));
+    q.push(Position(r,c,0));
     for(auto a: order){
-        int res;
+        int res = 0;
         for(int i: a){
-            int enter = 0;
             int num = 2;
+            int m[4][4] = {0,};
             while(!q.empty()){
-                int x = q.front().first;
-                int y = q.front().second;
+                int x = q.front().x;
+                int y = q.front().y;
+                int z = q.front().z;
                 q.pop();
-                if(i == board[x][y] ){
-                    num--;
-                    enter++;
+                if(i == board[x][y]) num--;
+                if(num != 0){
+                    for(int j = 0; j < 4; j++){
+                        if(x + dx[j] >= 0 && x + dx[j] < 4 && y + dy[j] >= 0 && y + dy[j] < 4 && m[x + dx[j]][y + dy[j]]){
+                            if(z == j+1 && board[x][y] != 0){
+                                m[x + dx[j]][y + dy[j]] = m[x][y] + 1;
+                            }
+                            else if(z == j+1){
+                                m[x + dx[j]][y + dy[j]] = m[x][y];
+                            }
+                            else{
+                                m[x + dx[j]][y + dy[j]] = m[x][y] + 1;
+                            }
+                            q.push(Position(x + dx[j], y + dy[j], j+1));
+                        }
+                    }
+                }
+                else{
+                    res += m[x][y] + 2;
+                    queue<Position> emt;
+                    swap(q, emt);
+                    q.push(Position(x,y,0));
+                    break;
                 }
             }
         }
