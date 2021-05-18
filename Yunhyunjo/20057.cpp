@@ -21,13 +21,11 @@ void tornado(int x, int y, int d) {
 		if (d == 0) {
 			if (x + dx[i] >= 0 && x + dx[i] < n && y + dy[i] >= 0 && y + dy[i] < n) {
 				if (i == 9) {
-					grid[x + dx[i]][y + dy[i]] = grid[x][y] - total;
+					grid[x + dx[i]][y + dy[i]] = grid[x + dx[i]][y + dy[i]] + grid[x][y] - total;
 					continue;
 				}
 				grid[x + dx[i]][y + dy[i]] = grid[x + dx[i]][y + dy[i]] + grid[x][y] * dz[i];
 				total = total + grid[x][y] * dz[i];
-				//cout << grid[x][y] * dz[i] << " ";
-				cout << x + dx[i] << " : " << y + dy[i] << " , ";
 			}
 			else {
 				if (i == 9) {
@@ -36,19 +34,16 @@ void tornado(int x, int y, int d) {
 				}
 				sand = sand + grid[x][y] * dz[i];
 				total = total + grid[x][y] * dz[i];
-				//cout << grid[x][y] * dz[i] << " ";
 			}
 		}
 		else if (d == 1) {
-			if (x + dx[i] >= 0 && x + dx[i] < n && y + (-dy[i]) >= 0 && y + (-dy[i]) < n) {
+			if (y + dx[i] >= 0 && y + dx[i] < n && x + (-dy[i]) >= 0 && x + (-dy[i]) < n) {
 				if (i == 9) {
-					grid[y + (-dy[i])][x + dx[i]] = grid[x][y] - total;
+					grid[x + (-dy[i])][y + dx[i]] = grid[x + (-dy[i])][y + dx[i]] + grid[x][y] - total;
 					continue;
 				}
-				grid[y + (-dy[i])][x + dx[i]] = grid[y + (-dy[i])][x + dx[i]] + grid[x][y] * dz[i];
+				grid[x + (-dy[i])][y + dx[i]] = grid[x + (-dy[i])][y + dx[i]] + grid[x][y] * dz[i];
 				total = total + grid[x][y] * dz[i];
-				//cout << grid[x][y] * dz[i] << " ";
-				cout << y + (-dy[i]) << " : " << x + dx[i] << " , ";
 			}
 			else {
 				if (i == 9) {
@@ -57,19 +52,16 @@ void tornado(int x, int y, int d) {
 				}
 				sand = sand + grid[x][y] * dz[i];
 				total = total + grid[x][y] * dz[i];
-				//cout << grid[x][y] * dz[i] << " ";
 			}
 		}
 		else if (d == 2) {
 			if (x + dx[i] >= 0 && x + dx[i] < n && y + (-dy[i]) >= 0 && y + (-dy[i]) < n) {
 				if (i == 9) {
-					grid[x + dx[i]][y + (-dy[i])] = grid[x][y] - total;
+					grid[x + dx[i]][y + (-dy[i])] = grid[x + dx[i]][y + (-dy[i])] + grid[x][y] - total;
 					continue;
 				}
 				grid[x + dx[i]][y + (-dy[i])] = grid[x + dx[i]][y + (-dy[i])] + grid[x][y] * dz[i];
 				total = total + grid[x][y] * dz[i];
-				//cout << grid[x][y] * dz[i] << " ";
-				cout << x + dx[i] << " : " << y + (-dy[i]) << " , ";
 			}
 			else {
 				if (i == 9) {
@@ -78,19 +70,16 @@ void tornado(int x, int y, int d) {
 				}
 				sand = sand + grid[x][y] * dz[i];
 				total = total + grid[x][y] * dz[i];
-				//cout << grid[x][y] * dz[i] << " ";
 			}
 		}
 		else {
-			if (x + dx[i] >= 0 && x + dx[i] < n && y + dy[i] >= 0 && y + dy[i] < n) {
+			if (y + dx[i] >= 0 && y + dx[i] < n && x + dy[i] >= 0 && x + dy[i] < n) {
 				if (i == 9) {
-					grid[y + dy[i]][x + dx[i]] = grid[x][y] - total;
+					grid[x + dy[i]][y + dx[i]] = grid[x + dy[i]][y + dx[i]] + grid[x][y] - total;
 					continue;
 				}
-				grid[y + dy[i]][x + dx[i]] = grid[y + dy[i]][x + dx[i]] + grid[x][y] * dz[i];
+				grid[x + dy[i]][y + dx[i]] = grid[x + dy[i]][y + dx[i]] + grid[x][y] * dz[i];
 				total = total + grid[x][y] * dz[i];
-				//cout << grid[x][y] * dz[i] << " ";
-				cout << y + dy[i] << " : " << x + dx[i] << " , ";
 			}
 			else {
 				if (i == 9) {
@@ -99,11 +88,9 @@ void tornado(int x, int y, int d) {
 				}
 				sand = sand + grid[x][y] * dz[i];
 				total = total + grid[x][y] * dz[i];
-				//cout << grid[x][y] * dz[i] << " ";
 			}
 		}
 	}
-	cout << sand << endl;
 	grid[x][y] = 0;
 }
 int arr[499][499];
@@ -128,17 +115,8 @@ int main() {
 	while (1) {
 		nx = nx + cx[d];
 		ny = ny + cy[d];
-		cout << nx << " " << ny << endl;
 		if(grid[nx][ny] != 0) tornado(nx, ny, d);
-		arr[nx][ny] = 1;
-		
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-				cout << grid[i][j] << " ";
-			}
-			cout << "\n";
-		}
-		cout << endl;
+
 		num++;
 		
 		if (num == c) {
