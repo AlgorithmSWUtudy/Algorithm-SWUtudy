@@ -15,7 +15,7 @@ for _ in range(k):
   arr_move.append(list(input().split()))
 dx = [0,1,0,-1]
 dy = [1,0,-1,0]
-def dfs(i,j):
+def search(i,j):
   dd = 0
   o = 0
   count = 0
@@ -48,5 +48,5 @@ def dfs(i,j):
       print('dd:',dd)
       o += 1
   return count
-print(dfs(0,0))
+print(search(0,0))
       
