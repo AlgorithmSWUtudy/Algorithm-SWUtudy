@@ -1,4 +1,3 @@
-# 다시풀기
 def solution(n, results):
     answer = 0
     INF = 1e9
@@ -23,18 +22,18 @@ def solution(n, results):
     for i in range(n):
         temp = []
         if rank[i] != INF:
-            if rank[i] == 1:
+            if rank[i] == 2:
                 for j in range(n):
                     if graph[i][j] == -1:
                         temp.append((j))
                 if len(temp) == 1:
-                    rank[i] = 0
-            if rank[i] == n-2:
+                    rank[temp[0]] = 1
+            if rank[i] == n-1:
                 for j in range(n):
                     if graph[i][j] == 1:
                         temp.append((j))
                 if len(temp) == 1:
-                    rank[i] = n-1
+                    rank[temp[0]] = n
     for i in range(n):
         if rank[i] != INF:
             answer+=1
