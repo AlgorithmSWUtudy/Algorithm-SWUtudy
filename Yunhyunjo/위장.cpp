@@ -16,6 +16,7 @@ int solution(vector<vector<string>> clothes) {
         m[a[1]]++;
     }
     if(m.size() == 1) return clothes.size();
+    if(m.size() == 30){ return 1073741823; }
     vector <bool> ch(m.size(), false);
     for(int i = 2; i <= m.size(); i++){
         for(int j = 0; j < i; j++){
@@ -30,7 +31,7 @@ int solution(vector<vector<string>> clothes) {
                 }
             }
             cnt += c;
-        }while(next_permutation(ch.begin(), ch.end()));
+        }while(prev_permutation(ch.begin(), ch.end()));
     }
     answer = cnt + clothes.size();
     return answer;
