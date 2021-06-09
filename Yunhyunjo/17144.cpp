@@ -50,7 +50,6 @@ vector < vector <int>> clean(vector <vector <int>> v, int r, int c) {
 		tmp1 = tmp3;
 		tmp2 = tmp4;
 	}
-
 	int a = 1;
 	while (1) {
 		if (x1 - a < 0 && x2 + a >= r) break;
@@ -66,8 +65,7 @@ vector < vector <int>> clean(vector <vector <int>> v, int r, int c) {
 		}
 		a++;
 	}
-	
-	for (int i = c - 1; i >= 0; i--) {
+	for (int i = c - 2; i >= 0; i--) {
 		tmp3 = v[0][i];
 		tmp4 = v[r-1][i];
 		v[0][i] = tmp1;
@@ -75,30 +73,29 @@ vector < vector <int>> clean(vector <vector <int>> v, int r, int c) {
 		tmp1 = tmp3;
 		tmp2 = tmp4;
 	}
-
 	a = 1;
 	int t1 = 0, t2 = r-1;
 	while (1) {
-		if (t1 + a >= x1 && x2 - a <= x2) break;
+		if (t1 + a >= x1 && t2 - a <= x2) break;
 		if (t1 + a < x1) {
 			tmp3 = v[t1 + a][0];
 			v[t1 + a][0] = tmp1;
 			tmp1 = tmp3;
 		}
-		if (x2 - a > x2) {
+		if (t2 - a > x2) {
 			tmp4 = v[t2 - a][0];
 			v[t2 - a][0] = tmp2;
 			tmp2 = tmp4;
 		}
 		a++;
 	}
-
 	return v;
 }
 
 int main() {
 
 	ios_base::sync_with_stdio(false);
+	cin.tie(0); cout.tie(0);
 
 	int r, c, t;
 
@@ -126,6 +123,7 @@ int main() {
 
 	for (int i = 0; i < t; i++) {
 		map = spread(map, r, c);
+		
 	}
 	int cnt = 2;
 	for (int i = 0; i < r; i++) {
