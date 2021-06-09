@@ -8,7 +8,7 @@
 #   graph.append(a)
 r = 7
 c = 8
-t = 3
+t = 6
 graph = [[0, 0, 0, 0, 0, 0, 0, 9], [0, 0, 0, 0, 3, 0, 0, 8], [-1, 0, 5, 0, 0, 0, 22, 0], [-1, 8, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 10, 43, 0], [0, 0, 5, 0, 15, 0, 0, 0], [0, 0, 40, 0, 0, 0, 20, 0]]
 air_cleaner = [(2, 0), (3, 0)]
 print(5//5)
@@ -40,16 +40,21 @@ def air_move2(ar,ac):
   flag = 0
   ac = ac + 1
   while flag<=4:
-    print('ar')
-    print(ar,ac)
+    if time == 1:
+      print('ar')
+      print(ar,ac)
     nar = ar +dar[flag]
     nac = ac + dac[flag] 
-    print('')
-    print(nar,nac)
+    if time == 1:
+      print('nar')
+      print(nar,nac)
+      print(temp)
     if nar <0 or nar >= r or nac<0 or nac >= c:
       flag += 1
       continue
     if graph[nar][nac] == -1:
+      graph[ar][ac] = temp[0]
+      temp.pop(0)
       break
     temp.append(graph[ar][ac])
     graph[ar][ac] = temp[0]
@@ -73,7 +78,6 @@ while time < t:
           continue
         temp_graph[ni][nj] = temp_graph[ni][nj] + graph[i][j]//5
         count+=1
-      if (time == 1):
       graph[i][j] = graph[i][j] - ((graph[i][j]//5)*count)
   for i in range(r):
     for j in range(c):
