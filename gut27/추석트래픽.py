@@ -1,41 +1,25 @@
 def solution(lines):
     answer = 0
-    dict = {}
-    start_second = 1e9
-    end_second = 0
-    for line in lines:
-        date, time, second = map(str,line.split(' '))
-        temp = time.split(':')
-        temp_time = int(temp[0])*3600+int(temp[1])*60+float(temp[2])
-        second = second.replace('s','')
-        temp[-1] = str(float(temp[-1])-float(second))
-        temp_time2 = int(temp[0])*3600+int(temp[1])*60+float(temp[2])
-        
-        start_second = min(start_second,int(temp_time2))
-        end_second = max(end_second,int(temp_time))
+    arr = []
+    start = 1e9
+    end = 0
 
-        if temp_time in dict:
-            dict[temp_time] = dict[temp_time] + 1
-        else:
-            dict[temp_time] = 1
-            
-        if temp_time2 in dict:
-            dict[temp_time2] = dict[temp_time2] + 1
-        else:
-            dict[temp_time2] = 1
-            
-        for i in dict:
-            if temp_time2< i < temp_time:
-                dict[i] = dict[i]+1
-
-    for i in range(start_second, end_second):
-        start = float(i) + 0.000
-        end = float(i) + 0.999
-        temp = 0
-        for i in dict:
-            if start<= i <= end:
-                temp += dict[i]
-                
-        answer = max(answer,temp)
-    
+    for i in range(len(lines)):
+        temp_S = lines[i].split(' ')[1].split(':')
+        temp_T = lines[i].split(' ')[2].replace('s','')
+        Finish = int(int(temp_S[0])*3600+int(temp_S[1])*60 + float(temp_S[2])*1000)
+        Start = int(Finish - (float(temp_T)*1000)+1)
+        arr.append((Start,i))
+        arr.append((Finish,i))
+        start = min(start, Start)
+        end = max(end,Finish)
+    arr.sort()
+    for i in range(start, end):
+        Tp = []
+        for ar in arr:
+            if i <= ar[0] <=i+999 and ar[1] not in Tp:
+                Tp.append(ar[1])
+        answer = max(answer,len(Tp))
+    if answer == 0:
+        return 1
     return answer
