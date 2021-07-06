@@ -1,31 +1,37 @@
 #include <string>
 #include <vector>
-#include <map>
+#include <algorithm>
+#include <iostream>
 
 using namespace std;
 
 int solution(vector<string> words) {
     int answer = 0;
-    map <string, int> m;
-    for(string s: words){
-        string tmp = "";
-        int i = 0;
-        for(char c: s){
-            tmp += c;
-            m[tmp]++;
-        }
-    }
-    for(string s: words){
-        string tmp = "";
-        int i = 0;
-        for(char c: s){
-            tmp += c;
-            if(m[tmp] == 1){
-                answer += tmp.size();
-                break;
+    
+    sort(words.begin(), words.end());
+    for(int i = 0; i < words.size(); i++){
+        int maxi = 0;
+        if(i-1 >= 0){
+            int j;
+            for(j = 0; j < words[i].size(); j++){
+                if(j >= words[i-1].size() || words[i-1][j] != words[i][j]) {
+                    j++;
+                    break;
+                }
             }
-            if(s.size() == tmp.size()) answer += s.size();
+            maxi = j;
         }
+        if(i+1 < words.size()){
+            int j;
+            for(j = 0; j < words[i].size(); j++){
+                if(j >= words[i+1].size() || words[i+1][j] != words[i][j]) {
+                    j++;
+                    break;
+                }
+            }
+            maxi = max(maxi, j);
+        }
+        answer += maxi;
     }
     return answer;
 }
