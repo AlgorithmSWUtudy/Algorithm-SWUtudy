@@ -13,4 +13,5 @@ def solution(cacheSize, cities):
             queue.append(city)
             answer += 5
     return answer
+
 //append-  오른쪽 삽입, popleft 왼쪽에서 빼기
