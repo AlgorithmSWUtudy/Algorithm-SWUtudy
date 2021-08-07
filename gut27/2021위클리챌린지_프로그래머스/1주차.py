@@ -4,7 +4,4 @@ def solution(price, money, count):
         answer = money - (((price + price*(count-1)) * (count//2)) + (price*count))
     else:
         answer = money - (price + (price*count)) * (count//2)
-    if answer < 0:
-        return -answer
-    else:
-        return 0
+    return abs(min(0,answer))
