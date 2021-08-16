@@ -16,17 +16,15 @@ int main() {
 	while (lt <= rt) {
 		mid = (lt + rt) / 2;
 		cnt = 0;
+
 		for (int i = 1; i <= n; i++) {
-			cnt += min(n, int(mid / i));
+			cnt += min(n, mid / i);
 		}
 
-		if (cnt >= k) {
-			rt = mid - 1;
-		}
-		else {
-			lt = mid + 1;
-		}
+		if (cnt >= k) rt = mid - 1;
+		else lt = mid + 1;
 	}
+
 	cout << lt;
 	return 0;
 }
