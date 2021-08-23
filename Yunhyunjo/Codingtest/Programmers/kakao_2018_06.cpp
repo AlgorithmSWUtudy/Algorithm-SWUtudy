@@ -1,41 +1,41 @@
 #include <string>
 #include <vector>
-#include <algorithm>
 #include <iostream>
 
 using namespace std;
 
-long long bin(int i){
-    long long r, res = 0, j = 1;
-    while(i != 0){
-        r = i % 2;
-        i /= 2;
-        res += r*j;
-        j *= 10;
+string binary(int s, int n){
+    string str = "";
+    int num;
+    while(n){
+        num = n % 2;
+        char c = num + 48;
+        str = c + str;
+        n /= 2;
     }
-    return res;
+    string z = "";
+    for(int i = 0; i < s - str.size(); i++){
+        z += '0';
+    }
+    
+    return z + str;
 }
 
 vector<string> solution(int n, vector<int> arr1, vector<int> arr2) {
-    vector<string> answer(n);
+    vector<string> answer;
+    vector <string> v1, v2;
+    
     for(int i = 0; i < n; i++){
-        string a = to_string(bin(arr1[i])), b = to_string(bin(arr2[i]));
-        string z = "";
-        for(int k = 0; k < n-a.size(); k++){
-            z+='0';
-        }
-        a = z + a;
-        z = "";
-        for(int k = 0; k < n-b.size(); k++){
-            z+='0';
-        }
-        b = z + b;
-        z = "";
+        v1.push_back(binary(n, arr1[i]));
+        v2.push_back(binary(n, arr2[i]));
+    }
+    for(int i = 0; i < n; i++){
+        string s = "";
         for(int j = 0; j < n; j++){
-            if(a[j] == '0' && b[j] == '0') z += ' ';
-            else z += '#';
+            if(v1[i][j] == '0' && v2[i][j] == '0') s += ' ';
+            else s+='#';
         }
-        answer[i] = z;
+        answer.push_back(s);
     }
     return answer;
 }
