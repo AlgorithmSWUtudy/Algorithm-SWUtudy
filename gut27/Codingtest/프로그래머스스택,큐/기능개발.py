@@ -26,3 +26,19 @@ def solution(progresses, speeds):
         if count > 0:
             answer.append(count)
     return answer
+
+/*
+다른 사람 코드
+def solution(progresses, speeds):
+    Q=[]
+    # zip을 이용해 작업률과 속도를 합침
+    for p, s in zip(progresses, speeds):
+        # Q라는 배열에 작업일수와 배포가능한 작업의 개수를 더함
+        if len(Q)==0 or Q[-1][0]<-((p-100)//s):
+            Q.append([-((p-100)//s),1])
+        else:
+            Q[-1][1]+=1
+    # 배포가능한 작업의 개수만 return
+    return [q[1] for q in Q]
+
+*/
