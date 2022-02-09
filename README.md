@@ -1,7 +1,7 @@
 # coding-teswut
 <h3 align='center'>Hi👋</h3>
 <br>
-<h3 align='center'>This it a repository for algorithm learning recording.</h3>
+<h3 align='center'>This is a repository for algorithm learning recording.</h3>
 <br>
 <h3 align='center'>So, You can see a two type of the studing documents.</h3>
 <br>
